@@ -45,12 +45,12 @@ ssh laurie@192.168.188.140
 330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4
 
 bomb:
-1)Public speaking is very easy.
-2)1 2 6 24 120 720 (factorial 1 to 6)
-3)0 q 777
-4)9 (fibonacci sequence of 55)
-5)0x6f 0x70 0x65 0x6b 0x6d 0x61 = opekma (array123="isrveawhobpnutfg", newstr[i] = (&array.123)[(char)(*(byte *)(i + line) & 15)], it means each character & 0xf should equal the index in array123 so our newstr equals "giants" at the end)
-6) 6 digits, must be under 7 and unique, starting with 4; the Function phase_6 use the input to sort 6 nodes, and then see if they are sorted in ascending order
+1)Public speaking is very easy.<br/>
+2)1 2 6 24 120 720 (factorial 1 to 6)<br/>
+3)0 q 777<br/>
+4)9 (fibonacci sequence of 55)<br/>
+5)0x6f 0x70 0x65 0x6b 0x6d 0x61 = opekma (array123="isrveawhobpnutfg", newstr[i] = (&array.123)[(char)(*(byte *)(i + line) & 15)], it means each character & 0xf should equal the index in array123 so our newstr equals "giants" at the end)<br/>
+6) 6 digits, must be under 7 and unique, starting with 4; the Function phase_6 use the input to sort 6 nodes, and then see if they are sorted in ascending order<br/>
 ![](./img/phase_6_nodes_mem.png)
 ```
 Public speaking is very easy.
@@ -71,10 +71,10 @@ Tourne gauche de 1 degrees
 ```
 that look like turtle logo algorithme, by changing those french word with actual instructions we got the password for zaz.
 ```
-left 90
-forward 50
-forward 1
-left 1
+lt 90
+fd 50
+fd 1
+lt 1
 ```
 [TURTLE LINK](https://www.transum.org/Software/Logo/Level2/Default.asp?Level=3)
 
