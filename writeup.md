@@ -44,7 +44,7 @@ sha256(Iheartpwnage) = 330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83
 ssh laurie@192.168.188.140
 330b845f32185747e4f8ca15d40ca59796035c89ea809fb5d30f4da83ecf45a4
 
-bomb:
+bomb:<br/>
 1)Public speaking is very easy.<br/>
 2)1 2 6 24 120 720 (factorial 1 to 6)<br/>
 3)0 q 777<br/>
