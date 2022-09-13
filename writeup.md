@@ -52,8 +52,15 @@ bomb:
 5)0x6f 0x70 0x65 0x6b 0x6d 0x61 = opekma (array123="isrveawhobpnutfg", newstr[i] = (&array.123)[(char)(*(byte *)(i + line) & 15)], it means each character & 0xf should equal the index in array123 so our newstr equals "giants" at the end)
 6) 6 digits, must be under 7 and unique, starting with 4; the Function phase_6 use the input to sort 6 nodes, and then see if they are sorted in ascending order
 ![](./img/phase_6_nodes_mem.png)
-
-thor:Publicspeakingisveryeasy.126241207201b2149opekmq426135 [BUG IN THE SUBJECT](https://stackoverflow.com/c/42network/questions/664/1628?r=SearchResults&s=1%7C12.5313#1628)
+```
+Public speaking is very easy.
+1 2 6 24 120 720
+0 q 777
+9
+opekma
+4 2 6 3 1 5
+```
+> thor:Publicspeakingisveryeasy.126241207201b2149opekmq426135 [BUG IN THE SUBJECT](https://stackoverflow.com/c/42network/questions/664/1628?r=SearchResults&s=1%7C12.5313#1628)
 
 We found a file named Turtle containing line like this:
 ```
@@ -62,5 +69,40 @@ Avance 50 spaces
 Avance 1 spaces
 Tourne gauche de 1 degrees
 ```
-that look like turtle logo algorithme, by changing those french word with actual instructions we got the password.
+that look like turtle logo algorithme, by changing those french word with actual instructions we got the password for zaz.
+```
+left 90
+forward 50
+forward 1
+left 1
+```
+[TURTLE LINK](https://www.transum.org/Software/Logo/Level2/Default.asp?Level=3)
+
+<img src="./img/turtle_1.png"  width="200" height="200">
+<img src="./img/turtle_2.png"  width="200" height="200">
+<img src="./img/turtle_3.png"  width="200" height="200">
+<img src="./img/turtle_4.png"  width="200" height="200">
+<img src="./img/turtle_5.png"  width="200" height="200">
+
+MD5 Hash of SLASH = 646da671ca01bb5d84dbb5fb2238dc8e
+
+> zaz:646da671ca01bb5d84dbb5fb2238dc8e
+
+We found an executable file named exploit_me, so we exploit it.
+the program copy av[1] into a local variable using strcpy"NON SECURE" and then prints it using puts(&var), so we have a buffer overflow.
+<img src="./img/exme_disass.png" width="60%" height=60%>
+
+Now we have to find the lenght needed to overwrite the return address.
+<img src="./img/exme_payload_len.png" width="60%" height=60%>
+Test the lenght:
+<img src="./img/exme_payload_test.png" width="60%" height=60%>
+<img src="./img/exme_payload_test2.png" width="60%" height=60%>
+
+Now we need to inject a [shellcode](https://shell-storm.org/shellcode/files/shellcode-811.php) and redirect to it:
+<img src="./img/exme_payload_findaddr.png" width="60%" height=60%>
+<img src="./img/exme_payload_shell.png" width="60%" height=60%>
+
+
+
+
 
