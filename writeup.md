@@ -1,9 +1,25 @@
-after we get the the range of ip we use nmap to scan ips on the range and their open ports:
-nmap 192.168.188.0/24 #10.13.100.0 in school labs
+##Writeup 1
+
+After downloading and setting up the machine on VirtualBox, There isn't any visible IP address on startup like other ISOs to connect easily on SSH.
+This is not a big deal, we will use nmap to scan all devices on our network and their open ports. We will not scan for all possible addresses in our network because that will take a long time. And since we already know the range of IPs we want to search for (10.13.100.0 to 10.13.100.256), we will use nmap with that range: (Otherwise we can use arp to get IPs addresses on the network then nmap to scan for open ports):
+
+```console
+nmap 10.13.100.0/24
+```
+![Nmap report Image](url "Nmap scan")
+
+That will show us the open ports, we notice that a host is up with open ports for ssh, ftp, *http* and *https*. That mean we can access it via our navigator
 after that we use dirbuster to fuzz all available directories in the website:
-dirb https://192.168.188.140
+
+![Website Image](url "Website")
+
+We can access to the website but still we can't do much with a simple HTML page, let's try fuzzing directories with *dirb* to see if we can find any useful directory.
+```console
+dirb https://10.13.100.x
+```
+
 we find a /forum + other directories we will get to later
-after scanning the posts in the forum, we find a thread from lmezard where there is a leaked pw : !q\]Ej?*5K5cy*AJ
+after scanning the posts in the forum, we find a thread from lmezard where there is a bunch of logs and errors, after a quick scan we can find a leaked pw : **!q\]Ej?\*5K5cy\*AJ**
 we log in with lmezard:!q\]Ej?*5K5cy*AJ and we find her email we go to https://192.168.188.140/webmail/ we use the same pw
 we will find identifiers to the database phpmyadmin root/Fg-'kKXBj87E:aJ$
 we can inject a webshell using sql, but we'll need to find the directory where to put it, all directories will return an error except https://192.168.188.140/forum/templates_c/
