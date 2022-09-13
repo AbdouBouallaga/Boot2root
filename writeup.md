@@ -99,15 +99,13 @@ int main() {
 
 if we try looking for getme() functions we will only find from getme8() to getme12(), the others are missing, now we the end of password and that is:
 
-01 02 03 04 05 06 07 08 09 10 11 12
-?  ?  ?  ?  ?  ?  ?  w  n  a  g  e
+? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; w &nbsp; n &nbsp; a &nbsp; g &nbsp; e
 
 now if we search for "return" we will find some commented returns those are the 7 characters left: h p e a I r t
 
 If we assume the I is the first letter since it's uppercase + the last word will most likely be pwnage we will be left with the characters: h e a r t
 
-01 02 03 04 05 06 07 08 09 10 11 12
-I  h  e  a  r  t  p  w  n  a  g  e
+I &nbsp; h &nbsp; e &nbsp; a &nbsp; r &nbsp; t &nbsp; p &nbsp; w &nbsp; n &nbsp; a &nbsp; g &nbsp; e
 
 let's trying hashing the following password and let's try ssh to laurie;
 
