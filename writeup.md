@@ -89,16 +89,17 @@ MD5 Hash of SLASH = 646da671ca01bb5d84dbb5fb2238dc8e
 > zaz:646da671ca01bb5d84dbb5fb2238dc8e
 
 We found an executable file named exploit_me, so we exploit it.
-the program copy av[1] into a local variable using strcpy"NON SECURE" and then prints it using puts(&var), so we have a buffer overflow.
+the program copy av[1] into a local variable using strcpy"NON SECURE" and then prints it using puts(&var), so we have a buffer overflow.<br/>
 <img src="./img/exme_disass.png" width="60%" height=60%>
 
-Now we have to find the lenght needed to overwrite the return address.
+Now we have to find the lenght needed to overwrite the return address.<br/>
 <img src="./img/exme_payload_len.png" width="60%" height=60%>
-Test the lenght:
+
+Test the lenght:<br/>
 <img src="./img/exme_payload_test.png" width="60%" height=60%>
 <img src="./img/exme_payload_test2.png" width="60%" height=60%>
 
-Now we need to inject a [shellcode](https://shell-storm.org/shellcode/files/shellcode-811.php) and redirect to it:
+Now we need to inject a [shellcode](https://shell-storm.org/shellcode/files/shellcode-811.php) and redirect to it:<br/>
 <img src="./img/exme_payload_findaddr.png" width="60%" height=60%>
 <img src="./img/exme_payload_shell.png" width="60%" height=60%>
 
