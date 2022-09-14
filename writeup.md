@@ -119,34 +119,34 @@ IT WORKED!!
 <h2>Bomb:</h2><br/>
 Readme:
 ```
-laurie@BornToSecHackMe:~$ cat README
-Diffuse this bomb!
-When you have all the password use it as "thor" user with ssh.
+	laurie@BornToSecHackMe:~$ cat README
+	Diffuse this bomb!
+	When you have all the password use it as "thor" user with ssh.
 
-HINT:
-P
- 2
- b
+	HINT:
+	P
+	 2
+	 b
 
-o
-4
+	o
+	4
 
-NO SPACE IN THE PASSWORD (password is case sensitive).
+	NO SPACE IN THE PASSWORD (password is case sensitive).
 ```
 
-<h3>1) The function phase_1 compare the line with a string predefined.</h3>
+1) The function phase_1 compare the line with a string predefined.
 
 <img src="./img/phase_1.png">
 
 > Public speaking is very easy.<br/>
 
-<h3>2) The function phase_2 expect us to write factorial 1 to 6.</h3>
+2) The function phase_2 expect us to write factorial 1 to 6.
 
 <img src="./img/phase_2.png" width="40%" height="40%">
 
 > 1 2 6 24 120 720 <br/>
 
-<h3>3) The function phase_3 have multiple choices:</h3>
+3) The function phase_3 have multiple choices:
 
 <img src="./img/phase_3.png" width="30%" height="30%"><br/>
 
@@ -154,7 +154,7 @@ We already know from the readme that the 2nd param should be a 'b', that left us
 
 > 1 b 214<br/>
 
-<h3>4) The function phase_4 use Fibonacci number:</h3><br/>
+4) The function phase_4 use Fibonacci number:<br/>
 
 <img src="./img/phase_4.png" width="300px" height="300px"><img src="./img/phase_4_1.png" width="300px" height="300px"><br/>
 
@@ -162,13 +162,13 @@ But the way its implemented we need to use f(n+1) not f(n), so to get Fibonacci(
 
 > 9 <br/>
 
-<h3>5) PLZ WRITE POTATO HERE </h3>
+5) PLZ WRITE POTATO HERE 
 
 <img src="./img/phase_5.png" width="40%" height="40%"><br/>
 
 > 0x6f 0x70 0x65 0x6b 0x6d 0x61 = opekma (array123="isrveawhobpnutfg", newstr[i] = (&array.123)[(char)(*(byte *)(i + line) & 15)], it means each character & 0xf should equal the index in array123 so our newstr equals "giants" at the end)<br/>
 
-<h3>6) The Function phase_6 use the input to sort 6 nodes, and then see if they are sorted in ascending order.</h3><br/>
+6) The Function phase_6 use the input to sort 6 nodes, and then see if they are sorted in ascending order.<br/>
 ![](./img/phase_6_nodes_mem.png)
 ```
 Public speaking is very easy.
