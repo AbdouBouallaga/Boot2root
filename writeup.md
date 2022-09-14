@@ -117,6 +117,7 @@ ssh laurie@192.168.188.140
 IT WORKED!!
 
 <h2>Bomb:</h2><br/>
+
 Readme:
 ```
 	laurie@BornToSecHackMe:~$ cat README
@@ -133,7 +134,7 @@ Readme:
 
 	NO SPACE IN THE PASSWORD (password is case sensitive).
 ```
-
+<br/>
 1) The function phase_1 compare the line with a string predefined.
 
 <img src="./img/phase_1.png">
