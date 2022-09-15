@@ -163,11 +163,30 @@ But the way its implemented we need to use f(n+1) not f(n), so to get Fibonacci(
 
 > 9 <br/>
 
-5) PLZ WRITE POTATO HERE 
+5) This function takes an str that is exactly 6 characters long then creates a new str that's filled with the following line:
+
+*newstr[i] = (&array.123)[(char)(*(byte *)(i + line) & 15)]*
+
+And in the end it checks if newstr equals to "giants". array123 is an array that contains the following characters : *array123="isrveawhobpnutfg"*.
+Now all we have to do is look for the index of each character in "giants" in array123 and perform the logical & operation with 0xf on that;
+
+newstr[0] = 0x6f & 0xf = 0xf or 15 (15 here is the index of 'g' in array123;
+
+newstr[1] = 0x70 & 0xf = 0x0 or 0 (0 here is the index of 'i' in array123;
+
+newstr[2] = 0x65 & 0xf = 0x5 or 5 (5 here is the index of 'a' in array123;
+
+newstr[3] = 0x6b & 0xf = 0xb or 11 (11 here is the index of 'n' in array123;
+
+newstr[4] = 0x6d & 0xf = 0xd or 13 (13 here is the index of 't' in array123;
+
+newstr[5] = 0x71 & 0xf = 0x1 or 1 (1 here is the index of 's' in array123;
+
+We will end up with **newstr = "opekmq"**
 
 <img src="./img/phase_5.png" width="40%" height="40%"><br/>
 
-> 0x6f 0x70 0x65 0x6b 0x6d 0x61 = opekma (array123="isrveawhobpnutfg", newstr[i] = (&array.123)[(char)(*(byte *)(i + line) & 15)], it means each character & 0xf should equal the index in array123 so our newstr equals "giants" at the end)<br/>
+ NB: There are so many different answers that will pass this level but this is the one that works with the password at the end;
 
 6) The Function phase_6 use the input to sort 6 nodes, and then see if they are sorted in ascending order.<br/>
 ![](./img/phase_6_nodes_mem.png)
