@@ -21,8 +21,8 @@ dirb https://10.13.100.x
 ![dirb result](img/dirb.png "dirb result")
 
 we find a /forum + other directories we will get to later
-after scanning the posts in the forum, we find a thread from lmezard where there is a bunch of logs and errors, after a quick scan we can find a leaked pw : **!q\]Ej?\*5K5cy\*AJ**
-we log in with lmezard:!q\]Ej?\*5K5cy\*AJ and we don't find anything that's interesting.
+after scanning the posts in the forum, we find a thread from lmezard where there is a bunch of logs and errors, after a quick scan we can find a leaked pw : **!q\\]Ej?\*5K5cy\*AJ**
+we log in with lmezard:!q\\]Ej?\*5K5cy\*AJ and we don't find anything that's interesting.
 Our last command with dirb found a https:://10.13.100.x/webmail/ , now let's go back to the forum and get lmezard email then log with it using the same passowrd.
 we will find identifiers to the database phpmyadmin **root/Fg-'kKXBj87E:aJ$**
 https:://10.13.100.x/phpmyadmin/ was also a directory found, let's log into it using those credentials:
@@ -99,7 +99,7 @@ int main() {
 }
 ```
 
-if we try looking for getme() functions we will only find from getme8() to getme12(), the others are missing, now we the end of password and that is:
+if we try looking for getme() functions we will only find from getme8() to getme12(), the others are missing, now we know that the end of password is:
 
 ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; ? &nbsp; w &nbsp; n &nbsp; a &nbsp; g &nbsp; e
 
@@ -197,7 +197,7 @@ Public speaking is very easy.
 1 2 6 24 120 720
 1 b 214
 9
-opekma
+opekmq
 4 2 6 3 1 5
 ```
 > thor:Publicspeakingisveryeasy.126241207201b2149opekmq426135 [BUG IN THE SUBJECT](https://stackoverflow.com/c/42network/questions/664/1628?r=SearchResults&s=1%7C12.5313#1628)
